@@ -48,13 +48,15 @@ public class MathUtilsTest {
         @Test
         @DisplayName("When adding positive numbers")
         void testAddPositives() {
-            assertEquals(2, mathUtils.add(1, 1));
+            assertEquals(2, mathUtils.add(1, 1), "Should return right sum");
         }
 
         @Test
         @DisplayName("When adding negative numbers")
         void testAddNegatives() {
-            assertEquals(-2, mathUtils.add(-1, -1));
+            int expected = -2;
+            int actual = mathUtils.add(-1, -1);
+            assertEquals(expected, actual, ()->"Should return sum " + expected + " but return " + actual);// not this string concat is lazy,
         }
     }
 
