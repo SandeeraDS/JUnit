@@ -67,8 +67,9 @@ public class MathUtilsTest {
         assertThrows(ArithmeticException.class, () -> mathUtils.divide(1, 0));
     }
 
-    @Test
-    void testComputeCircleArea() {
+    @RepeatedTest(5)
+    void testComputeCircleArea(RepetitionInfo repetitionInfo) {
+        System.out.println("current repetition = "+repetitionInfo.getCurrentRepetition());
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10));
     }
 
