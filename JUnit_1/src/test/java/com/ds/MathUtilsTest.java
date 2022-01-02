@@ -35,6 +35,7 @@ public class MathUtilsTest {
     @Test
     @DisplayName("Testing add method")
     @EnabledOnOs(OS.WINDOWS)
+    @Tag("Math")
     void testAdd() {
 
         int expected = 2;
@@ -44,6 +45,7 @@ public class MathUtilsTest {
     }
 
     @Nested
+    @Tag("Math")
     class NestedAddTest {
         @Test
         @DisplayName("When adding positive numbers")
@@ -61,15 +63,22 @@ public class MathUtilsTest {
     }
 
     @Test
+    @Tag("Math")
     void testDivide() {
         boolean isServerUp = false;
         assumeTrue(isServerUp);
         assertThrows(ArithmeticException.class, () -> mathUtils.divide(1, 0));
     }
 
-    @RepeatedTest(5)
-    void testComputeCircleArea(RepetitionInfo repetitionInfo) {
-        System.out.println("current repetition = "+repetitionInfo.getCurrentRepetition());
+//    @RepeatedTest(5)
+//    void testComputeCircleArea(RepetitionInfo repetitionInfo) {
+//        System.out.println("current repetition = "+repetitionInfo.getCurrentRepetition());
+//        assertEquals(314.1592653589793, mathUtils.computeCircleArea(10));
+//    }
+
+    @Test
+    @Tag("Circle")
+    void testComputeCircleArea() {
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10));
     }
 
@@ -81,6 +90,7 @@ public class MathUtilsTest {
 
     @Test
     @DisplayName("multiply methods")
+    @Tag("Math")
     void testMultiply() {
         // assertEquals(4,mathUtils.multiply(2,2));
         assertAll(
