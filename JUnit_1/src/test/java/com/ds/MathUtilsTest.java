@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MathUtilsTest {
     MathUtils mathUtils;
+    TestInfo testInfo;
+    TestReporter testReporter;
 
     @BeforeAll
     static void beforeAllInt() {
@@ -22,9 +24,12 @@ public class MathUtilsTest {
     }
 
     @BeforeEach
-    void init() {
+    void init(TestInfo testInfo, TestReporter testReporter) {
+        this.testInfo = testInfo;
+        this.testReporter = testReporter;
         System.out.println("Starting method...");
         mathUtils = new MathUtils();
+        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
     }
 
     @AfterEach
@@ -92,6 +97,8 @@ public class MathUtilsTest {
     @DisplayName("multiply methods")
     @Tag("Math")
     void testMultiply() {
+//        System.out.println("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
+        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
         // assertEquals(4,mathUtils.multiply(2,2));
         assertAll(
                 () -> assertEquals(4, mathUtils.multiply(2, 2)),
