@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class BMICalculatorTest {
 
 
     @ParameterizedTest
-   // @ValueSource(doubles = {70.0, 89.0, 95.0, 110.0})
+    // @ValueSource(doubles = {70.0, 89.0, 95.0, 110.0})
     @ValueSource(doubles = {88.0, 89.0, 95.0, 110.0})
     void should_ReturnTrue_When_DietRecommended_Params(Double coderWeight) {
         //given
@@ -56,11 +57,11 @@ public class BMICalculatorTest {
     }
 
     @ParameterizedTest(name = "weight={0}, height={1}")
-    @CsvSource(value ={"89.0,1.72","95.0,1.75","110.0,1.78"})
+    @CsvSource(value = {"89.0,1.72", "95.0,1.75", "110.0,1.78"})
     void should_ReturnTrue_When_DietRecommended_Csv_Params(Double coderWeight, Double coderHeight) {
         //given
         double weight = coderWeight;
-        double height =coderHeight;
+        double height = coderHeight;
         //when
         boolean recommended = BMICalculator.isDietRecommended(weight, height);
 
@@ -73,7 +74,7 @@ public class BMICalculatorTest {
     void should_ReturnTrue_When_DietRecommended_ActualCsv_Params(Double coderWeight, Double coderHeight) {
         //given
         double weight = coderWeight;
-        double height =coderHeight;
+        double height = coderHeight;
         //when
         boolean recommended = BMICalculator.isDietRecommended(weight, height);
 
@@ -149,5 +150,19 @@ public class BMICalculatorTest {
 
         //then
         assertArrayEquals(expected, bmiScores);
+    }
+
+    @Test
+    void should_ReturnCoderWithWorstBMIIn1Ms_When_CoderListHas10000Elements() {
+        // given
+        List<Coder> coders = new ArrayList<>();
+
+        for (int i = 0; i < 10000; i++) {
+            coders.add(new Coder(1.0 + i, 10.0 + i));
+        }
+        // when
+        Executable executable = () -> BMICalculator.findCoderWithWorstBMI(coders);
+        // then
+        assertTimeout(Duration.ofMillis(10), executable);
     }
 }
