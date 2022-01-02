@@ -12,12 +12,12 @@ public class MathUtilsTest {
     MathUtils mathUtils;
 
     @BeforeAll
-    static void beforeAllInt(){
+    static void beforeAllInt() {
         System.out.println("This needs to run before all");
     }
 
     @AfterAll
-    static void afterAllInt(){
+    static void afterAllInt() {
         System.out.println("This needs to run after all");
     }
 
@@ -28,7 +28,7 @@ public class MathUtilsTest {
     }
 
     @AfterEach
-    void cleanUp(){
+    void cleanUp() {
         System.out.println("Cleaning up...");
     }
 
@@ -41,6 +41,21 @@ public class MathUtilsTest {
         int actual = mathUtils.add(1, 1);
         assertEquals(expected, actual);
 
+    }
+
+    @Nested
+    class NestedAddTest {
+        @Test
+        @DisplayName("When adding positive numbers")
+        void testAddPositives() {
+            assertEquals(2, mathUtils.add(1, 1));
+        }
+
+        @Test
+        @DisplayName("When adding negative numbers")
+        void testAddNegatives() {
+            assertEquals(-2, mathUtils.add(-1, -1));
+        }
     }
 
     @Test
@@ -57,8 +72,19 @@ public class MathUtilsTest {
 
     @Test
     @Disabled
-    void testDisabled(){
+    void testDisabled() {
         fail("This test should be disabled");
+    }
+
+    @Test
+    @DisplayName("multiply methods")
+    void testMultiply() {
+        // assertEquals(4,mathUtils.multiply(2,2));
+        assertAll(
+                () -> assertEquals(4, mathUtils.multiply(2, 2)),
+                () -> assertEquals(0, mathUtils.multiply(2, 0)),
+                () -> assertEquals(-1, mathUtils.multiply(1, -1))
+        );
     }
 
 
