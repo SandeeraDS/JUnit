@@ -1,8 +1,11 @@
 package com.ds;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MathUtilsTest {
@@ -31,6 +34,7 @@ public class MathUtilsTest {
 
     @Test
     @DisplayName("Testing add method")
+    @EnabledOnOs(OS.WINDOWS)
     void testAdd() {
 
         int expected = 2;
@@ -41,6 +45,8 @@ public class MathUtilsTest {
 
     @Test
     void testDivide() {
+        boolean isServerUp = false;
+        assumeTrue(isServerUp);
         assertThrows(ArithmeticException.class, () -> mathUtils.divide(1, 0));
     }
 
