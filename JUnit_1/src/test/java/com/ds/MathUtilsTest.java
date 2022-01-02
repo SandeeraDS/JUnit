@@ -30,6 +30,7 @@ public class MathUtilsTest {
     }
 
     @Test
+    @DisplayName("Testing add method")
     void testAdd() {
 
         int expected = 2;
@@ -46,6 +47,12 @@ public class MathUtilsTest {
     @Test
     void testComputeCircleArea() {
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10));
+    }
+
+    @Test
+    @Disabled
+    void testDisabled(){
+        fail("This test should be disabled");
     }
 
 
